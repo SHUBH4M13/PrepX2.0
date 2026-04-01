@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { useNavigate } from 'react-router-dom';
 
 export default function Login() {
@@ -17,6 +17,8 @@ export default function Login() {
     const GoToforgotpassword = () => {
         Navigate("/forgotpassword")
     }
+
+    const [isLoading , setisloading ] = useState(false)
 
   return (
     <div className="bg-darkbg min-h-screen flex justify-center items-center p-4">
@@ -55,19 +57,18 @@ export default function Login() {
                     className="w-full p-2 border border-gray-600 rounded-md focus:outline-none focus:border-PrimaryGold bg-transparent text-white"
                 />
             </div>
-
-            {error && (
+{/* 
+            { && (
                 <div className="bg-red-500/10 border border-red-500/20 rounded-md p-2">
-                    <p className="text-red-500 text-sm">{error}</p>
+                    <p className="text-red-500 text-sm">{}</p>
                 </div>
-            )}
+            )} */}
 
             <button
                 type="submit"
-                disabled={isLoading}
                 className={`bg-PrimaryGold cursor-pointer text-black font-semibold py-2 rounded-md hover:bg-hovergold transition-all flex justify-center items-center ${isLoading ? 'opacity-70' : ''}`}
             >
-                {/* {isLoading ? (
+                {isLoading ? (
                     <>
                         <svg className="animate-spin -ml-1 mr-2 h-4 w-4 text-black" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
                             <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
@@ -77,7 +78,7 @@ export default function Login() {
                     </>
                 ) : (
                     'Login'
-                )} */}
+                )}
             </button>
         </form>
 

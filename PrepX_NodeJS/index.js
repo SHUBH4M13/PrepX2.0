@@ -9,8 +9,8 @@ dotenv.config()
 
 const app = express();
 const PORT = 8069
-
-const db_url = process.env.MONGO_URL || `mongodb://127.0.0.1:27017/PrepX`
+//process.env.MONGO_URL || 
+const db_url = `mongodb://127.0.0.1:27017/PrepX`
 
 const server = http.createServer(app);
 
@@ -22,11 +22,9 @@ ConnectDB(db_url)
 
 app.get("/:examcode" , async (req,res) => {
     const examcode = req.params.examcode
-    console.log(examcode)
-    try {
-        
-    const data = await Questions.find({ Examcode: examcode})
 
+    try {
+    const data = await Questions.find({ Examcode: examcode})
     return res.status(200).json({
         msg: "Success",
         data
@@ -38,6 +36,7 @@ app.get("/:examcode" , async (req,res) => {
             msg: "Server error"
         })
     }
+    
 })
 
 server.listen( PORT , () => {
