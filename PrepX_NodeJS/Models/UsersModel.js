@@ -1,5 +1,5 @@
 import mongoose from "mongoose";
-import QuestionsModel from "./Questions";
+import ResultModel from "./Result"
 
 const UserScehma = new mongoose.Schema({
     Username: {
@@ -15,6 +15,7 @@ const UserScehma = new mongoose.Schema({
     Password: {
         type:String,
         required: true,
+        select: false
     },
     ProfilePic: {
         type:String,
@@ -25,7 +26,7 @@ const UserScehma = new mongoose.Schema({
     },
     PrevTest: {
         type: mongoose.Schema.ObjectId,
-        ref: QuestionsModel
+        ref: ResultModel
     }
 })
 

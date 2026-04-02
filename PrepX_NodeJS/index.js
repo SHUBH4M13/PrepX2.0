@@ -2,8 +2,8 @@ import express from "express"
 import http from "http"
 import dotenv from "dotenv"
 import cors from "cors"
-import Questions from "./Models/Questions.js"
 import ConnectDB from "./DatabaseConnect.js"
+import UserRouter from "./Routes/User.js"
 
 dotenv.config()
 
@@ -20,24 +20,7 @@ app.use(express.urlencoded({extended: true}))
 
 ConnectDB(db_url)
 
-app.get("/:examcode" , async (req,res) => {
-    const examcode = req.params.examcode
-
-    try {
-    const data = await Questions.find({ Examcode: examcode})
-    return res.status(200).json({
-        msg: "Success",
-        data
-    })
-
-    } catch (error) {
-        console.log(examcode)
-        return res.status(500).json({
-            msg: "Server error"
-        })
-    }
-    
-})
+app.use("/user" , UserRouter );
 
 server.listen( PORT , () => {
     console.log(`http://localhost:${PORT}`)
