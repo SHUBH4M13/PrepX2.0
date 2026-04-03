@@ -1,5 +1,6 @@
 import express from "express"
-import { HandleCreateAcc , HandleLogin , HandleDeleteAccount , HandleGetUserResult } from "../Controller/User"
+import { HandleCreateAcc , HandleLogin , HandleDeleteAccount } from "../Controller/User"
+import { HandleGetUserResult } from "../Controller/Results"
 
 const UserRouter = express.Router();
 

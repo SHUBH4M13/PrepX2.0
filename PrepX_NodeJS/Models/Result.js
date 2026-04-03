@@ -6,7 +6,7 @@ const ResultSchema = new mongoose.Schema({
         ref: "UsersModel",
         required: true
     }, 
-    Score: {
+    TotalScore: {
         type: Number,
         required: true,
     },
