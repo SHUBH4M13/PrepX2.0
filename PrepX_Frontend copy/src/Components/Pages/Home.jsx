@@ -7,6 +7,8 @@ import NumbersStrap from '../Sections/HomeSection/NumbersStrap'
 import Feature from '../Sections/HomeSection/Features/Feature'
 import Exams from '../Sections/HomeSection/Exams/Exams'
 
+import { Analytics } from "@vercel/analytics/react"
+
 
 export default function Home() {
   const targetRef = useRef(null);
@@ -26,6 +28,7 @@ export default function Home() {
     <div className='bg-darkbg w-full '>
       
       <Navbar />
+      <Analytics />
       <HeroText Scrolldown={scrollToTarget}  ScrollFeatures = {scrollToFea} />
 
       <div className=' flex justify-center items-center'>
