@@ -3,7 +3,11 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router";
 
 export default function Login() {
-    const LOGIN_URL = import.meta.env.VITE_BACKEND_URL + "/login";
+
+    console.log("ENV:", import.meta.env);
+    console.log("API:", import.meta.env.VITE_API_URL);
+
+    const LOGIN_URL = import.meta.env.VITE_BACKEND_URL + "/user/login";
     const Navigate = useNavigate();
 
     const GoToSignup = () => {
@@ -19,8 +23,8 @@ export default function Login() {
     }
 
     const [data, setdata] = useState({
-        username: "",
-        password: "",
+        Email: "",
+        Password: "",
     });
 
     const [error, seterror] = useState("");
@@ -42,7 +46,7 @@ export default function Login() {
         seterror("");
         
         // Validate form inputs
-        if (!data.username || !data.password) {
+        if (!data.Email || !data.Password) {
             seterror("Please fill all the Required Fields");
             return;
         }
@@ -62,10 +66,11 @@ export default function Login() {
         } catch (err) {
             if (err.response) {
                 if (err.response.status === 401) {
-                    seterror("Please check username or password");
+                    seterror("Please check Email or password");
                 } else if (err.response.status === 404) {
                     seterror("No user found");
                 } else {
+                    console.log(err)
                     seterror("Login failed. Please try again.");
                 }
             } else if (err.request) {
@@ -97,13 +102,13 @@ export default function Login() {
 
                 <form className="flex flex-col mt-6 space-y-4" onSubmit={HandleSubmit}>
                     <div>
-                        <p className="text-dullwhite text-sm">Username</p>
+                        <p className="text-dullwhite text-sm">Email</p>
                         <input
                             type="text"
-                            name="username"
-                            value={data.username}
+                            name="Email"
+                            value={data.Email}
                             onChange={handleChange}
-                            placeholder="Enter Username"
+                            placeholder="Enter Email"
                             className="w-full p-2 border border-gray-600 rounded-md focus:outline-none focus:border-PrimaryGold bg-transparent text-white"
                         />
                     </div>
@@ -112,8 +117,8 @@ export default function Login() {
                         <p className="text-dullwhite text-sm">Password</p>
                         <input
                             type="password"
-                            name="password"
-                            value={data.password}
+                            name="Password"
+                            value={data.Password}
                             onChange={handleChange}
                             placeholder="Enter password"
                             className="w-full p-2 border border-gray-600 rounded-md focus:outline-none focus:border-PrimaryGold bg-transparent text-white"

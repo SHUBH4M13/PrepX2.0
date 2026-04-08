@@ -1,12 +1,12 @@
 import express from "express"
-import { HandleCreateAcc , HandleLogin , HandleDeleteAccount } from "../Controller/User"
-import { HandleGetUserResult } from "../Controller/Results"
+import { HandleCreateAcc , HandleLogin , HandleDeleteAccount } from "../Controller/User.js"
+import { HandleGetUserResult } from "../Controller/Results.js"
 
 const UserRouter = express.Router();
 
 UserRouter
 .post("/signup" , HandleCreateAcc )
-.get("/login" , HandleLogin )
+.post("/login" , HandleLogin )
 .delete("/delete" , HandleDeleteAccount )
 .get("/results" , HandleGetUserResult )
 

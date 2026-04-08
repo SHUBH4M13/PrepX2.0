@@ -1,4 +1,4 @@
-import ResultModel from "../Models/Result"
+import ResultModel from "../Models/Result.js"
 
 async function HandleGetUserResult(req,res){
 

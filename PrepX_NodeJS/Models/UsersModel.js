@@ -1,5 +1,5 @@
 import mongoose from "mongoose";
-import ResultModel from "./Result"
+import ResultModel from "./Result.js"
 
 const UserScehma = new mongoose.Schema({
     Username: {
@@ -15,7 +15,6 @@ const UserScehma = new mongoose.Schema({
     Password: {
         type:String,
         required: true,
-        select: false
     },
     ProfilePic: {
         type:String,

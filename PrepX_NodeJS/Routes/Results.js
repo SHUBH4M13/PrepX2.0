@@ -1,5 +1,5 @@
 import express from "express"
-import { HandleSaveResult } from "../Controller/Results"
+import { HandleSaveResult } from "../Controller/Results.js"
 
 const ResultRouter = express.Router();
 

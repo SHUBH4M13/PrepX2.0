@@ -1,7 +1,7 @@
-import QuestionsModel from "../Models/Questions";
+import QuestionsModel from "../Models/Questions.js";
 
 async function HandleGetQuestions(req,res) {
-  const examcode = req.params.examcode;
+  const examcode = req.params.examCode;
 
   try {
     const data = await QuestionsModel.find({ Examcode: examcode });

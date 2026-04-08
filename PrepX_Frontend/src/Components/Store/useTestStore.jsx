@@ -11,7 +11,7 @@ const useTestStore = create((set, get) => ({
   fetchQuestions: async (examCode, token) => {
     if (!examCode || !token) return;
 
-    const EXAM_URL = `${import.meta.env.VITE_BACKEND_URL}/${examCode}`;
+    const EXAM_URL = `${import.meta.env.VITE_BACKEND_URL}/question/${examCode}`;
 
     try {
       const response = await axios.get(EXAM_URL, {
@@ -20,7 +20,7 @@ const useTestStore = create((set, get) => ({
           Authorization: `Bearer ${token}`,
         },
       });
-      const fetchedQuestions = response.data;
+      const fetchedQuestions = response.data.data;
 
       set({
         questions: fetchedQuestions,

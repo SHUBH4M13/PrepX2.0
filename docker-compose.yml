@@ -1,0 +1,23 @@
+version: "3"
+
+services:
+  backend:
+    build: ./PrepX_NodeJS
+    container_name: prepxbackend
+    ports:
+      - "8069:5000"
+    env_file:
+      - ./PrepX_NodeJS/.env
+    restart: always
+
+  frontend:
+    build:
+      context: ./PrepX_Frontend
+      args:
+        - VITE_BACKEND_URL=${VITE_BACKEND_URL}
+    container_name: prepxfrontend
+    ports:
+      - "5173:80"
+    depends_on:
+      - backend
+    restart: always

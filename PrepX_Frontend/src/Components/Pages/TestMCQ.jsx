@@ -118,7 +118,7 @@ export default function TestMCQ() {
 
         <div className="px-4 md:px-9 py-3 md:py-5">
           <p className="text-white text-base md:text-lg font-Helvetica">
-            {currentQuestion.instructions}
+            {currentQuestion.Instructions}
           </p>
         </div>
 
@@ -128,14 +128,14 @@ export default function TestMCQ() {
             Question {currentQuestionIndex + 1}:
           </p>
           <p className="text-white text-base md:text-lg font-Helvetica mt-2">
-            {currentQuestion.question}
+            {currentQuestion.Question}
           </p>
         </div>
 
         {/* Options section */}
         <div className="px-4 md:px-8 flex flex-col gap-3 md:gap-5 mt-2">
           <div className="flex flex-col gap-3 md:gap-6">
-            {['optionA', 'optionB', 'optionC', 'optionD'].map((option) => {
+            {['OptionA', 'OptionB', 'OptionC', 'OptionD'].map((option) => {
               // Need to capitalize the option key to match with correct answer format
               const capitalizedOption = option.charAt(0).toUpperCase() + option.slice(1);
               // Check if this capitalized option key is currently selected for this question

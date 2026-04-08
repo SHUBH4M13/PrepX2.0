@@ -1,10 +1,10 @@
 import express from "express"
-import  { HandleGetQuestions , HandleCreateQuestion , HandleDeleteQuestion , HandleUpdateQuestion } from "../Controller/Questions"
+import  { HandleGetQuestions , HandleCreateQuestion , HandleDeleteQuestion , HandleUpdateQuestion } from "../Controller/Questions.js"
 
 const QuestionRouter = express.Router();
 
 QuestionRouter
-.get("/:examcode" , HandleGetQuestions )
+.get("/:examCode" , HandleGetQuestions )
 .post("/add" , HandleCreateQuestion )
 .delete("/delete" , HandleDeleteQuestion )
 .put("/update" , HandleUpdateQuestion )

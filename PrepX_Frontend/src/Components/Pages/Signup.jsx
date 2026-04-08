@@ -5,7 +5,7 @@ import { useState } from 'react';
 import axios from 'axios';
 
 export default function Signup() {
-    const SIGNUP_URL = import.meta.env.VITE_BACKEND_URL+ "/signup";
+    const SIGNUP_URL = import.meta.env.VITE_BACKEND_URL+ "/user/signup";
     const Navigate = useNavigate();
 
     const GoToLogin = () => {
@@ -17,9 +17,9 @@ export default function Signup() {
     // }
 
     const [data, setdata] = useState({
-        username: "",
-        email: "",
-        password: "",
+        Username: "",
+        Email: "",
+        Password: "",
         confirmpass: ""
     })
 
@@ -63,15 +63,15 @@ export default function Signup() {
 
         let newError = "";
 
-        if (!data.username || !data.email || !data.password || !data.confirmpass) {
+        if (!data.Username || !data.Email || !data.Password || !data.confirmpass) {
             newError = "Please Fill all the Required Fields"
             setSignUpError(newError);
             return
-        } else if (data.password != data.confirmpass) {
+        } else if (data.Password != data.confirmpass) {
             newError = "Password aren't Matching"
             setSignUpError(newError);
             return
-        } else if (data.password.length <= 6) {
+        } else if (data.Password.length <= 6) {
             newError = "Password should be of alteast 7 Characters"
             setSignUpError(newError);
             return
@@ -102,8 +102,8 @@ export default function Signup() {
                         <p className="text-dullwhite text-sm">Username</p>
                         <input
                             type="text"
-                            name="username"
-                            value={data.username}
+                            name="Username"
+                            value={data.Username}
                             onChange={handleChange}
                             placeholder="Enter Username"
                             className="w-full p-2 border border-gray-600 rounded-md focus:outline-none focus:border-PrimaryGold bg-transparent text-white"
@@ -114,9 +114,9 @@ export default function Signup() {
                     <div>
                         <p className="text-dullwhite text-sm">Email</p>
                         <input
-                            type="email"
-                            name="email"
-                            value={data.email}
+                            type="Email"
+                            name="Email"
+                            value={data.Email}
                             onChange={handleChange}
                             placeholder="Enter Username"
                             className="w-full p-2 border border-gray-600 rounded-md focus:outline-none focus:border-PrimaryGold bg-transparent text-white"
@@ -127,11 +127,11 @@ export default function Signup() {
                     <div>
                         <p className="text-dullwhite text-sm">Password</p>
                         <input
-                            type="password"
-                            name="password"
-                            value={data.password}
+                            type="Password"
+                            name="Password"
+                            value={data.Password}
                             onChange={handleChange}
-                            placeholder="Enter password"
+                            placeholder="Enter Password"
                             className="w-full p-2 border border-gray-600 rounded-md focus:outline-none focus:border-PrimaryGold bg-transparent text-white"
                         />
                     </div>
@@ -139,11 +139,11 @@ export default function Signup() {
                     <div>
                         <p className="text-dullwhite text-sm">Confirm Password</p>
                         <input
-                            type="password"
+                            type="Password"
                             name="confirmpass"
                             value={data.confirmpass}
                             onChange={handleChange}
-                            placeholder="Confirm password"
+                            placeholder="Confirm Password"
                             className="w-full p-2 border border-gray-600 rounded-md focus:outline-none focus:border-PrimaryGold bg-transparent text-white"
                         />
                     </div>

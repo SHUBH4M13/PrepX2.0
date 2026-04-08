@@ -1,51 +1,60 @@
-import UserModel from "../Models/UsersModel"
+import UserModel from "../Models/UsersModel.js"
 import bcrypt from "bcrypt"
+import jwt from "jsonwebtoken"
+import dotenv from "dotenv"
 
-async function HandleCreateAcc(req,res){
+dotenv.config() 
+
+async function HandleCreateAcc(req, res) {
 
     try {
+        const { Username, Email, Password } = req.body
 
-        const { Username , Email , Password } = req.body()
-
-        if( !Username || !Email || !Password ){
+        if (!Username || !Email || !Password) {
             return res.status(400).json({
                 success: false,
                 msg: "Content missing"
             })
         }
 
-        const isExist = await UserModel.find({Email: Email})
+        const normalizedEmail = Email.toLowerCase()
 
-        if( isExist ){
+        const isExist = await UserModel.findOne({ Email: normalizedEmail })
+
+        if (isExist) {
             return res.status(400).json({
                 success: false,
-                msg: "User already exist"
+                msg: "User already exists"
             })
         }
 
-        const hashed_password = await bcrypt.hash(Password , 10);
+        const hashed_password = await bcrypt.hash(Password, 10)
 
-        await UserModel.create({
-            Username: Username,
-            Email: Email,
+        const newUser = await UserModel.create({
+            Username,
+            Email: normalizedEmail,
             Password: hashed_password
         })
 
-        return res.status(200).json({
-            success: true,
-            msg: "User Created"
-        })
-        
-        
-    } catch (error) {
+        const token = jwt.sign(
+            { id: newUser._id, email: newUser.Email },
+            process.env.JWT_SECRET,
+            { expiresIn: "7d" }
+        )
 
+        return res.status(201).json({
+            success: true,
+            msg: "User Created",
+            token
+        })
+
+    } catch (error) {
+        console.log(error)
         return res.status(500).json({
             success: false,
             msg: "Server Error"
         })
-        
     }
-
 }
 
 async function HandleLogin(req, res) {
@@ -59,7 +68,9 @@ async function HandleLogin(req, res) {
             })
         }
 
-        const user = await UserModel.findOne({ Email })
+        const user = await UserModel.findOne({ Email: Email })
+
+        console.log(user)
 
         if (!user) {
             return res.status(400).json({
@@ -79,7 +90,7 @@ async function HandleLogin(req, res) {
 
         const token = jwt.sign(
             { id: user._id, email: user.Email },
-            JWT_SECRET,
+            process.env.JWT_SECRET,
             { expiresIn: "7d" }
         )
 
@@ -90,6 +101,7 @@ async function HandleLogin(req, res) {
         })
 
     } catch (error) {
+        console.log(error);
         return res.status(500).json({
             success: false,
             msg: "Server Error"
