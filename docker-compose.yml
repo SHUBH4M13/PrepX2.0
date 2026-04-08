@@ -6,6 +6,8 @@ services:
     container_name: prepxbackend
     ports:
       - "8069:5000"
+    volumes:
+      - ./PrepX_NodeJS/logs:/app/logs
     env_file:
       - ./PrepX_NodeJS/.env
     restart: always

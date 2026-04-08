@@ -7,6 +7,7 @@ import ConnectDB from "./DatabaseConnect.js"
 import UserRouter from "./Routes/User.js"
 import QuestionRouter from "./Routes/Question.js"
 import ResultRouter from "./Routes/Results.js"
+import { loggerMiddleware } from "./Middleware/logging.js"
 
 dotenv.config()
 
@@ -27,6 +28,7 @@ app.use(express.urlencoded({extended: true}))
 
 ConnectDB(db_url)
 
+app.use(loggerMiddleware)
 app.use("/user" , UserRouter );
 app.use("/question" , QuestionRouter )
 app.use("/results" , ResultRouter)

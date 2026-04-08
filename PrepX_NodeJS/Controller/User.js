@@ -42,6 +42,8 @@ async function HandleCreateAcc(req, res) {
             { expiresIn: "7d" }
         )
 
+        log(`User login attempt: ${normalizedEmail}`)
+
         return res.status(201).json({
             success: true,
             msg: "User Created",
