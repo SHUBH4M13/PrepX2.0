@@ -8,7 +8,7 @@ function authenticateJWT(req, res, next) {
   if (authHeader && authHeader.startsWith(`Bearer `)) {
     const token = authHeader.split(" ")[1];
 
-    Jwt.verify(token, process.env.JWT_KEY, (err, decoded) => {
+    Jwt.verify(token, process.env.JWT_SECRET, (err, decoded) => {
       if (err) {
         return res.status(403).json({ msg: "Invalid or expired token" });
       }

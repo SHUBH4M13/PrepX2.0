@@ -4,9 +4,6 @@ import { useNavigate } from "react-router";
 
 export default function Login() {
 
-    console.log("ENV:", import.meta.env);
-    console.log("API:", import.meta.env.VITE_API_URL);
-
     const LOGIN_URL = import.meta.env.VITE_BACKEND_URL + "/user/login";
     const Navigate = useNavigate();
 

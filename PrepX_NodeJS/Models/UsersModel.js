@@ -26,6 +26,12 @@ const UserScehma = new mongoose.Schema({
     PrevTest: {
         type: mongoose.Schema.ObjectId,
         ref: ResultModel
+    },
+    Role : {
+        type: String,
+        enum: ['USER' , 'ADMIN'],
+        require: true,
+        default: 'USER'
     }
 })
 

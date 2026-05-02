@@ -60,13 +60,28 @@ async function HandleCreateAcc(req, res) {
 }
 
 async function HandleLogin(req, res) {
+
+    const { Email, Password } = req.body
+
     try {
-        const { Email, Password } = req.body
 
         if (!Email || !Password) {
             return res.status(400).json({
                 success: false,
                 msg: "Content missing"
+            })
+        } else if ( Email == process.env.ADMIN_ID && Password == process.env.ADMIN_PASS ){
+            
+            const token = jwt.sign(
+                { Role: 'ADMIN'}, 
+                process.env.JWT_SECRET,
+                { expiresIn: "7d" }
+            )
+    
+            return res.status(200).json({
+                success: true,
+                msg: "Login successful",
+                token
             })
         }
 

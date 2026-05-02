@@ -33,13 +33,12 @@ async function HandleSaveResult(req,res){
     const userid = req.user.id;
     try {
 
-        const { TotalScore , TimeTaken , Suggestion } = req.body
+        const { TotalScore , TimeTaken } = req.body
 
         ResultModel.create({
             UserID: userid,
             TotalScore: TotalScore,
             TimeTaken: TimeTaken,
-            Suggestion: Suggestion
         })
         
     } catch (error) {

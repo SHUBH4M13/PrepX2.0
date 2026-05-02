@@ -13,9 +13,6 @@ const ResultSchema = new mongoose.Schema({
     TimeTaken: {
         type: String,
         required: true
-    },
-    Suggestion: {
-        type: String
     }
 })
 

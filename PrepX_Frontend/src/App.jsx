@@ -12,6 +12,7 @@ import Result from "./Components/Pages/Result";
 import Forgotpassword from "./Components/Pages/Forgotpassword";
 import ReviewAnswers from "./Components/Pages/ReviewAnswers";
 import AFCAT from "./Components/Subjects/AFCAT";
+import AdminDashboard from "./Components/Sections/Dashboard/AdminDashboard"
 
 function App() {
   return (
@@ -28,6 +29,7 @@ function App() {
         <Route path= "/:examCode" element={<ProtectedRoute> <TestMCQ /> </ProtectedRoute>} />
         <Route path= "/review" element={<ProtectedRoute> <ReviewAnswers /> </ProtectedRoute>} />
         <Route path= "/result" element={<ProtectedRoute> <Result /> </ProtectedRoute>} />
+        <Route path="/admin" element={<AdminDashboard />} />
       </Routes>
     </Router>
   );

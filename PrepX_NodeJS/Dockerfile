@@ -10,5 +10,5 @@ COPY package*.json ./
 RUN npm ci --omit=dev
 COPY --from=build /app ./
 
-EXPOSE 5000
+EXPOSE 8000
 CMD ["node", "index.js"]
