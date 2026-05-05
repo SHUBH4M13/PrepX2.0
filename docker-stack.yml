@@ -1,0 +1,55 @@
+version: "3.8"
+
+services:
+
+  backend:
+    image: prepx-backend
+    ports:
+      - "8069:8000"
+    environment:
+      - MONGO_URL=mongodb://mongo:27017/PrepX
+    volumes:
+      - backend_logs:/app/logs
+    deploy:
+      replicas: 2
+      restart_policy:
+        condition: on-failure
+
+  frontend:
+    image: prepx-frontend
+    ports:
+      - "5173:80"
+    deploy:
+      replicas: 1
+
+  mongo:
+    image: mongo
+    volumes:
+      - mongo_data:/data/db
+    deploy:
+      placement:
+        constraints:
+          - node.role == manager
+
+  prometheus:
+    image: prom/prometheus
+    ports:
+      - "9090:9090"
+    volumes:
+      - ./prometheus.yml:/etc/prometheus/prometheus.yml
+    deploy:
+      replicas: 1
+
+  grafana:
+    image: grafana/grafana
+    ports:
+      - "3000:3000"
+    volumes:
+      - grafana_data:/var/lib/grafana
+    deploy:
+      replicas: 1
+
+volumes:
+  mongo_data:
+  grafana_data:
+  backend_logs:
